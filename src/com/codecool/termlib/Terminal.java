@@ -9,7 +9,7 @@ public class Terminal {
     private static final String CONTROL_CODE = "\033[";
     /**
      * Command for whole screen clearing.
-     *
+     * what?
      * Might be partitioned if needed.
      */
     private static final String CLEAR = "2J";
