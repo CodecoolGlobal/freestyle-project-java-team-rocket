@@ -11,13 +11,27 @@ public class Game {
     public static void moveChar() {
         char direction = userInput.next().charAt(0);
         if (direction == 'd') {
+            clearCharacter(currentY, currentX);
             Terminal.moveTo(currentY, currentX);
-            characterPlacement(map, currentY, currentX + 8);
+            characterPlacement(map, currentY, currentX + 1);
+        } else if (direction == 'a') {
+            clearCharacter(currentY, currentX);
+            Terminal.moveTo(currentY, currentX);
+            characterPlacement(map, currentY, currentX - 1);
+        } else if (direction == 'w') {
+            clearCharacter(currentY, currentX);
+            Terminal.moveTo(currentY, currentX);
+            characterPlacement(map, currentY - 1, currentX);
+        } else if (direction == 's') {
+            clearCharacter(currentY, currentX);
+            Terminal.moveTo(currentY, currentX);
+            characterPlacement(map, currentY + 1, currentX);
         }
     }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
-
+        currentY = yIndex;
+        currentX = xIndex;
         Terminal.moveTo(yIndex, xIndex);
         System.out.println(" [ ^ ^ ] ");
         Terminal.moveTo(yIndex+1, xIndex+1);
@@ -25,6 +39,7 @@ public class Game {
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.println("  ] [  ");
         Terminal.moveTo(72, 1);
+
 
 
 
@@ -39,6 +54,16 @@ public class Game {
         board[yIndex+2][xIndex+2] = '[';
     */
   }
+
+    public static void clearCharacter(int yIndex, int xIndex) {
+        Terminal.moveTo(yIndex, xIndex);
+        System.out.println("         ");
+        Terminal.moveTo(yIndex+1, xIndex+1);
+        System.out.println("       ");
+        Terminal.moveTo(yIndex+2, xIndex+1);
+        System.out.println("       ");
+        Terminal.moveTo(72, 1);
+    }
 
     public static char[][] buildBoard() {
 
@@ -87,9 +112,8 @@ public class Game {
     public static void main(String[] args) {
         drawBoard();
         characterPlacement(map, currentY, currentX);
-        moveChar();
-        try {
-        Thread.sleep(1000);
-      } catch(InterruptedException i) {}
+        while (true) {
+          moveChar();
+        }
     }
 }
