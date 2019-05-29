@@ -3,6 +3,17 @@ import com.codecool.termlib.*;
 
 
 public class Game {
+    public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
+        board[yIndex][xIndex] = '[';
+        board[yIndex][xIndex+1] = '^';
+        board[yIndex][xIndex+2] = '^';
+        board[yIndex][xIndex+3] = ']';
+        board[yIndex+1][xIndex+1] = '-';
+        board[yIndex+1][xIndex+2] = '-';
+        board[yIndex+2][xIndex+1] = ']';
+        board[yIndex+2][xIndex+2] = '[';
+    }
+
     public static char[][] buildBoard() {
         char[][] map = new char[67][64];
         //Fill the border of our board with '▅'s
@@ -30,8 +41,11 @@ public class Game {
                 map[y+1][x+3] = '▅';
             }
         }
+        characterPlacement(map, 2, 2);
+
         return map;
     }
+
     //Draw the actual board
     public static void drawBoard() {
         for (int y = 0; y < buildBoard().length; y++) {
@@ -41,6 +55,8 @@ public class Game {
             System.out.println();
         }
     }
+
+
 
     public static void main(String[] args) {
         drawBoard();
