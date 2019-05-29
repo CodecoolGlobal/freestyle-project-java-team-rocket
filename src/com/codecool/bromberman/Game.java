@@ -3,7 +3,20 @@ import com.codecool.termlib.*;
 
 
 public class Game {
+    static char[][] map = new char[67][64];
+
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
+
+        Terminal.moveTo(yIndex, xIndex);
+        System.out.println(" [ ^ ^ ] ");
+        Terminal.moveTo(yIndex+1, xIndex+1);
+        System.out.println("  - -  ");
+        Terminal.moveTo(yIndex+2, xIndex+1);
+        System.out.println("  ] [  ");
+        Terminal.moveTo(yIndex+15, xIndex);
+
+
+      /*
         board[yIndex][xIndex] = '[';
         board[yIndex][xIndex+1] = '^';
         board[yIndex][xIndex+2] = '^';
@@ -12,10 +25,11 @@ public class Game {
         board[yIndex+1][xIndex+2] = '-';
         board[yIndex+2][xIndex+1] = ']';
         board[yIndex+2][xIndex+2] = '[';
-    }
+    */
+  }
 
     public static char[][] buildBoard() {
-        char[][] map = new char[67][64];
+
         //Fill the border of our board with '▅'s
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++ ) {
@@ -41,13 +55,13 @@ public class Game {
                 map[y+1][x+3] = '▅';
             }
         }
-        characterPlacement(map, 2, 2);
 
         return map;
     }
 
     //Draw the actual board
     public static void drawBoard() {
+        Terminal.clearScreen();
         for (int y = 0; y < buildBoard().length; y++) {
             for (int x = 0; x < buildBoard()[y].length; x++) {
                 System.out.print(" " + buildBoard()[y][x]);
@@ -60,5 +74,10 @@ public class Game {
 
     public static void main(String[] args) {
         drawBoard();
+        characterPlacement(map, 5, 5);
+        characterPlacement(map, 15, 5);
+        try {
+        Thread.sleep(1000);
+      } catch(InterruptedException i) {}
     }
 }

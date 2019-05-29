@@ -39,7 +39,8 @@ public class Terminal {
      *
      * Might reset cursor position.
      */
-    public void clearScreen() {
+    public static void clearScreen() {
+      command(CONTROL_CODE + CLEAR);
     }
 
     /**
@@ -51,7 +52,9 @@ public class Terminal {
      * @param x Column number.
      * @param y Row number.
      */
-    public void moveTo(Integer x, Integer y) {
+    public static void moveTo(Integer y, Integer x) {
+      command(CONTROL_CODE + y + ";" + x + MOVE);
+
     }
 
     /**
@@ -117,6 +120,7 @@ public class Terminal {
      *
      * @param commandString The unique part of a command sequence.
      */
-    private void command(String commandString) {
+    private  static void command(String commandString) {
+      System.out.print(commandString);
     }
 }
