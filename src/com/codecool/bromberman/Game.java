@@ -6,14 +6,17 @@ import java.util.Scanner;
 public class Game {
     static char[][] map = new char[67][64];
     static Scanner userInput = new Scanner(System.in);
-    static int currentY = 5;
+    static int currentY = 3;
     static int currentX = 5;
     public static void moveChar() {
         char direction = userInput.next().charAt(0);
         if (direction == 'd') {
-            clearCharacter(currentY, currentX);
-            Terminal.moveTo(currentY, currentX);
-            characterPlacement(map, currentY, currentX + 1);
+            if (!checkBlock(direction, currentY, currentX)) {
+                clearCharacter(currentY, currentX);
+                Terminal.moveTo(currentY, currentX);
+                characterPlacement(map, currentY, currentX + 1);
+            }
+
         } else if (direction == 'a') {
             clearCharacter(currentY, currentX);
             Terminal.moveTo(currentY, currentX);
@@ -28,6 +31,16 @@ public class Game {
             characterPlacement(map, currentY + 1, currentX);
         }
     }
+
+    public static boolean checkBlock(char direction, int yIndex, int xIndex) {
+        if (direction == 'd') {
+            if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅' || map[yIndex+2][xIndex+8] == '▅') {
+                return true;
+            } else {
+            return false;
+        }
+    } return false;
+}
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
         currentY = yIndex;
@@ -99,6 +112,7 @@ public class Game {
     //Draw the actual board
     public static void drawBoard() {
         Terminal.clearScreen();
+        Terminal.moveTo(1, 1);
         for (int y = 0; y < buildBoard().length; y++) {
             for (int x = 0; x < buildBoard()[y].length; x++) {
                 System.out.print(" " + buildBoard()[y][x]);
