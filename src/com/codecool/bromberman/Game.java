@@ -1,9 +1,20 @@
 package com.codecool.bromberman;
 import com.codecool.termlib.*;
+import java.util.Scanner;
 
 
 public class Game {
     static char[][] map = new char[67][64];
+    static Scanner userInput = new Scanner(System.in);
+    static int currentY = 5;
+    static int currentX = 5;
+    public static void moveChar() {
+        char direction = userInput.next().charAt(0);
+        if (direction == 'd') {
+            Terminal.moveTo(currentY, currentX);
+            characterPlacement(map, currentY, currentX + 8);
+        }
+    }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
 
@@ -13,7 +24,8 @@ public class Game {
         System.out.println("  - -  ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.println("  ] [  ");
-        Terminal.moveTo(yIndex+15, xIndex);
+        Terminal.moveTo(72, 1);
+
 
 
       /*
@@ -74,8 +86,8 @@ public class Game {
 
     public static void main(String[] args) {
         drawBoard();
-        characterPlacement(map, 5, 5);
-        characterPlacement(map, 15, 5);
+        characterPlacement(map, currentY, currentX);
+        moveChar();
         try {
         Thread.sleep(1000);
       } catch(InterruptedException i) {}
