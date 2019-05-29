@@ -1,6 +1,7 @@
 package com.codecool.bromberman;
 import com.codecool.termlib.*;
 import java.util.Scanner;
+import java.io.*;
 
 
 public class Game {
@@ -8,6 +9,8 @@ public class Game {
     static Scanner userInput = new Scanner(System.in);
     static int currentY = 3;
     static int currentX = 5;
+
+
     public static void moveChar() {
         char direction = userInput.next().charAt(0);
         if (direction == 'd') {
@@ -32,9 +35,22 @@ public class Game {
         }
     }
 
+    public static char readInput(){
+       try{
+         if(System.in.available() > 0){
+           return (char) System.in.read();
+         }
+       }catch(IOException e){
+         System.out.print("hibaaaaa");
+       }
+         return 'v';
+     }
+
+
     public static boolean checkBlock(char direction, int yIndex, int xIndex) {
         if (direction == 'd') {
-            if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅' || map[yIndex+2][xIndex+8] == '▅') {
+            if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅'
+            || map[yIndex+1][xIndex+8] == '▅') {
                 return true;
             } else {
             return false;
@@ -46,12 +62,13 @@ public class Game {
         currentY = yIndex;
         currentX = xIndex;
         Terminal.moveTo(yIndex, xIndex);
-        System.out.println(" [ ^ ^ ] ");
+        System.out.print(" [ ^ ^ ] ");
         Terminal.moveTo(yIndex+1, xIndex+1);
-        System.out.println("  - -  ");
+        System.out.print("  - -  ");
         Terminal.moveTo(yIndex+2, xIndex+1);
-        System.out.println("  ] [  ");
-        Terminal.moveTo(72, 1);
+        System.out.print("  ] [  ");
+
+        //Terminal.moveTo(72, 1);
 
 
 
@@ -75,7 +92,7 @@ public class Game {
         System.out.println("       ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.println("       ");
-        Terminal.moveTo(72, 1);
+        //Terminal.moveTo(72, 1);
     }
 
     public static char[][] buildBoard() {
@@ -124,7 +141,13 @@ public class Game {
 
 
     public static void main(String[] args) {
+        //String[] cmd = {"/bin/sh", "-c", "stty raw </dev/tty"};
         drawBoard();
+        /*try {
+          Runtime.getRuntime().exec(cmd);}
+          catch (IOException e){
+            System.out.print("asd");
+          }*/
         characterPlacement(map, currentY, currentX);
         while (true) {
           moveChar();

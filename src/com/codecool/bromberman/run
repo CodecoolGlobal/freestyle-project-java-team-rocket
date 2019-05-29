@@ -1,0 +1,12 @@
+#!/bin/bash
+echo Hello, you started the Java game
+
+echo -e "\033[?25l"
+stty -echo
+
+javac com/codecool/bromberman/Game.java
+java com/codecool/bromberman/Game
+stty raw
+
+stty echo
+echo -e "\033[?25h"
