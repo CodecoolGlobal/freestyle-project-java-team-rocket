@@ -23,7 +23,7 @@ public class Game {
 
                     clearCharacter(currentY, currentX);
                     Terminal.moveTo(currentY, currentX);
-                    characterPlacement(map, currentY, currentX + 2);
+                    characterPlacement(map, currentY, currentX + 1);
                     System.out.print(map[currentY][currentX]);
                 }
             } else if (direction == 'a') {
@@ -59,37 +59,7 @@ public class Game {
 
 
     public static boolean checkBlock(char direction, int yIndex, int xIndex) {
-        double fakeyIndex;
-        double fakexIndex;
-        if (xIndex %2 == 0) {
-            fakexIndex = xIndex / 2;
-        }
-        else {
-            fakexIndex = Math.ceil((xIndex / 2) + 0.5);
-        }
-        if (yIndex%2 == 0) {
-            fakeyIndex = yIndex / 2;
-        }
-        else {
-            fakeyIndex = (yIndex / 2) + 0.5;
-        }
         if (direction == 'd') {
-<<<<<<< HEAD
-            System.out.print(" " + (int)fakexIndex + " ");
-            //System.out.print(fakeyIndex);
-            if (map[yIndex-1][(int) fakexIndex+5] == '▅' || map[(int) fakeyIndex][(int) fakexIndex+8] == '▅'
-            || map[(int) fakeyIndex+1][(int) fakexIndex+8] == '▅') {
-                return true;
-            }
-    }
-        /*else if (direction == 'a') {
-            if (map[(int) fakeyIndex-1][(int) fakexIndex-4] == '▅' || map[(int) fakeyIndex][(int) fakexIndex-3] == '▅'
-            || map[(int) fakeyIndex+1][(int) fakexIndex-3] == '▅') {
-                return true;
-            }
-        }*/
-     return false;
-=======
             if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅'
             || map[yIndex+1][xIndex+8]  == '▅') {
 
@@ -98,7 +68,6 @@ public class Game {
             return false;
         }
     } return false;
->>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
@@ -106,22 +75,15 @@ public class Game {
         currentX = xIndex;
         Terminal.moveTo(yIndex, xIndex);
         System.out.print(" [ ^ ^ ] ");
-        Terminal.moveTo(yIndex+2, xIndex+2);
+        Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.print("  - -  ");
-        Terminal.moveTo(yIndex+4, xIndex+2);
+        Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.print("  ] [  ");
-<<<<<<< HEAD
-        currentY = yIndex;
-        currentX = xIndex;
-        //System.out.print(currentY + " ");
-        //System.out.print(currentX);
-=======
 
         //Terminal.moveTo(72, 1);
 
 
 
->>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 
       /*
         board[yIndex][xIndex] = '[';
@@ -138,11 +100,10 @@ public class Game {
     public static void clearCharacter(int yIndex, int xIndex) {
         Terminal.moveTo(yIndex, xIndex);
         System.out.println("         ");
-        Terminal.moveTo(yIndex+2, xIndex+2);
+        Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.println("       ");
-        Terminal.moveTo(yIndex+4, xIndex+2);
+        Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.println("       ");
-        Terminal.moveTo(yIndex, xIndex);
         //Terminal.moveTo(72, 1);
     }
 
@@ -156,10 +117,11 @@ public class Game {
                 } else if (x == 0 || x == 1 || x == 62 || x == 63) {
                     map[y][x] = '▅';
                 } else {
+
                     map[y][x] = ' ';
                 }
             }
-        }
+        } Terminal.resetStyle();
         //Fill the inner parts of the board with non-destructable elements
         for (int y = 5; y < map.length-2; y += 5) {
             for (int x = 6; x < map.length-6; x += 8) {
@@ -180,6 +142,7 @@ public class Game {
     //Draw the actual board
     public static void drawBoard() {
         Terminal.clearScreen();
+
         Terminal.moveTo(1, 1);
         for (int y = 0; y < buildBoard().length; y++) {
             for (int x = 0; x < buildBoard()[y].length; x++) {
@@ -187,6 +150,7 @@ public class Game {
             }
             System.out.println();
         }
+
     }
 
 
