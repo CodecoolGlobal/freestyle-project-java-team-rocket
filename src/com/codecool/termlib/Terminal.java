@@ -112,6 +112,7 @@ public class Terminal {
         try {
           Runtime.getRuntime().exec(cmd);}
           catch (IOException e){}
+        System.out.println();
     }
 
     /**
