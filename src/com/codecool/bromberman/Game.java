@@ -15,12 +15,15 @@ public class Game {
         char direction = '0';
         Terminal.rawModeNoEcho();
         while (playing) {
+
             direction = readInput();
             if (direction == 'd') {
+
                 if (!checkBlock(direction, currentY, currentX)) {
+
                     clearCharacter(currentY, currentX);
                     Terminal.moveTo(currentY, currentX);
-                    characterPlacement(map, currentY, currentX + 1);
+                    characterPlacement(map, currentY, currentX + 2);
                     System.out.print(map[currentY][currentX]);
                 }
             } else if (direction == 'a') {
@@ -58,7 +61,7 @@ public class Game {
     public static boolean checkBlock(char direction, int yIndex, int xIndex) {
         if (direction == 'd') {
             if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅'
-            || map[yIndex+1][xIndex+8] == '▅') {
+            || map[yIndex+1][xIndex+8]  == '▅') {
 
                 return true;
             } else {
@@ -72,9 +75,9 @@ public class Game {
         currentX = xIndex;
         Terminal.moveTo(yIndex, xIndex);
         System.out.print(" [ ^ ^ ] ");
-        Terminal.moveTo(yIndex+1, xIndex+1);
+        Terminal.moveTo(yIndex+2, xIndex+2);
         System.out.print("  - -  ");
-        Terminal.moveTo(yIndex+2, xIndex+1);
+        Terminal.moveTo(yIndex+4, xIndex+2);
         System.out.print("  ] [  ");
 
         //Terminal.moveTo(72, 1);
@@ -97,17 +100,18 @@ public class Game {
     public static void clearCharacter(int yIndex, int xIndex) {
         Terminal.moveTo(yIndex, xIndex);
         System.out.println("         ");
-        Terminal.moveTo(yIndex+1, xIndex+1);
+        Terminal.moveTo(yIndex+2, xIndex+2);
         System.out.println("       ");
-        Terminal.moveTo(yIndex+2, xIndex+1);
+        Terminal.moveTo(yIndex+4, xIndex+2);
         System.out.println("       ");
+        Terminal.moveTo(yIndex, xIndex);
         //Terminal.moveTo(72, 1);
     }
 
     public static char[][] buildBoard() {
 
         //Fill the border of our board with '▅'s
-        for (int y = 0; y < map.length; y++) {
+        for (int y = 0; y < map.length ; y++) {
             for (int x = 0; x < map[y].length; x++ ) {
                 if (y == 0 || y == 1 || y == 65 || y == 66) {
                     map[y][x] = '▅';
