@@ -99,14 +99,14 @@ public class Game {
 }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
-        currentY = yIndex;
-        currentX = xIndex;
+        Terminal.setColor(Color.CYAN_LETTER);
         Terminal.moveTo(yIndex, xIndex);
         System.out.print("[ ^ ^ ]");
         Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.print(" - - ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.print(" ] [ ");
+        Terminal.resetStyle();
         currentY = yIndex;
         currentX = xIndex;
         //System.out.print(currentY + " ");
@@ -202,12 +202,13 @@ public class Game {
     public static void drawBoard() {
         Terminal.clearScreen();
         Terminal.moveTo(1, 1);
+        Terminal.setColor(Color.YELLOW_LETTER);
         for (int y = 0; y < buildBoard().length; y++) {
             for (int x = 0; x < buildBoard()[y].length; x++) {
                 System.out.print(buildBoard()[y][x]);
             }
             System.out.println();
-        }
+        } Terminal.resetStyle();
     }
 
     public static void goodBye(){
@@ -220,10 +221,12 @@ public class Game {
             Thread.sleep(5000);
           } catch(InterruptedException i) {}
       Terminal.clearScreen();
+      Terminal.getCursorBack();
     }
 
 
     public static void main(String[] args) {
+      Terminal.cursorInvisible();
       Terminal.clearScreen();
       boolean running = true;
       Terminal.setColor(Color.RED_LETTER);
