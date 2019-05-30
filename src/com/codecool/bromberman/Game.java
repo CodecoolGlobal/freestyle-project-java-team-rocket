@@ -210,16 +210,45 @@ public class Game {
         }
     }
 
+    public static void goodBye(){
+      Terminal.clearScreen();
+      Terminal.setColor(Color.YELLOW_LETTER);
+      Terminal.moveTo(35, 70);
+      System.out.print("GOOOOOOOOD BYEEEEEEEEEEEEEEEE");
+      Terminal.moveTo(1, 1);
+      try {
+            Thread.sleep(5000);
+          } catch(InterruptedException i) {}
+      Terminal.clearScreen();
+    }
 
 
     public static void main(String[] args) {
-        Terminal.cursorInvisible();
-        drawBoard();
-        //destructableWalls();
-        characterPlacement(map, currentY, currentX);
-        while (playing==true) {
-          moveChar();
+      Terminal.clearScreen();
+      boolean running = true;
+      Terminal.setColor(Color.RED_LETTER);
+      System.out.println("BROMBERMAN");
+      Terminal.resetStyle();
+      System.out.println("What would you like to do?");
+        System.out.println("1: Exit");
+        System.out.println("2: Play");
+
+      while (running == true) {
+        int userInp = userInput.nextInt();
+
+        if (userInp == 1) {
+          goodBye();
+          running = false;
+        } else if (userInp == 2) {
+          drawBoard();
+          characterPlacement(map, currentY, currentX);
+          while (playing==true) {
+            moveChar();
+          }
+          goodBye();
+          running = false;
+
         }
-        Terminal.getCursorBack();
     }
-}
+  }
+  }
