@@ -42,8 +42,16 @@ public class Game {
                     Terminal.moveTo(currentY, currentX);
                     characterPlacement(map, currentY + 1, currentX);
                 }
-            }
-            else if (direction == 'x') {
+            } else if (direction == 'b') {
+
+                activateBomb();
+                try {
+
+                      Thread.sleep(2000);
+                      deactivateBomb();
+                  } catch(InterruptedException i) {}
+
+            } else if (direction == 'x') {
                 playing = false;
             }
         }
@@ -68,14 +76,12 @@ public class Game {
             || map[yIndex+1][xIndex+6] == '▅') {
                 return true;
             }
-    }
-        else if (direction == 'a') {
+    } else if (direction == 'a') {
             if (map[yIndex-1][xIndex-2] == '▅' || map[yIndex][xIndex-2] == '▅'
             || map[yIndex+1][xIndex-2] == '▅') {
                 return true;
             }
-        }
-        else if (direction == 'w') {
+        } else if (direction == 'w') {
             //System.out.print(" " + yIndex + " ");
             //System.out.print(" " + xIndex + " ");
                 if (map[yIndex-2][xIndex-1] == '▅' || map[yIndex-2][xIndex] == '▅'
@@ -84,8 +90,7 @@ public class Game {
                 || map[yIndex-2][xIndex+5] == '▅') {
                     return true;
                 }
-            }
-            else if (direction == 's') {
+            } else if (direction == 's') {
                 //System.out.print(" " + yIndex + " ");
                 //System.out.print(" " + xIndex + " ");
                     if (map[yIndex+2][xIndex-1] == '▅' || map[yIndex+2][xIndex] == '▅'
@@ -94,35 +99,64 @@ public class Game {
                     || map[yIndex+2][xIndex+5] == '▅') {
                         return true;
                     }
-                }
-     return false;
-}
+
+                    }
+            return false;
+        }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
-        currentY = yIndex;
-        currentX = xIndex;
+        Terminal.setColor(Color.CYAN_LETTER);
         Terminal.moveTo(yIndex, xIndex);
         System.out.print("[ ^ ^ ]");
         Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.print(" - - ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.print(" ] [ ");
+        Terminal.resetStyle();
         currentY = yIndex;
         currentX = xIndex;
-        //System.out.print(currentY + " ");
-        //System.out.print(currentX);
+    }
 
-      /*
-        board[yIndex][xIndex] = '[';
-        board[yIndex][xIndex+1] = '^';
-        board[yIndex][xIndex+2] = '^';
-        board[yIndex][xIndex+3] = ']';
-        board[yIndex+1][xIndex+1] = '-';
-        board[yIndex+1][xIndex+2] = '-';
-        board[yIndex+2][xIndex+1] = ']';
-        board[yIndex+2][xIndex+2] = '[';
-    */
-  }
+      public static void bombPlacement() {
+            for (int i = 33; i < 36; i++) {
+                Terminal.moveTo(i, 63);
+                System.out.println("XXXX");
+            }
+        }
+
+    public static void activateBomb() {
+        //activate the bomb vertical
+        for (int i = 28; i < 41; i++) {
+            Terminal.moveTo(i, 63);
+            System.out.println("XXXX");
+        }
+        //active the bomb horizontal
+        for (int i = 50; i < 76; i++) {
+            Terminal.moveTo(33, i);
+            System.out.println("XXXX");
+            Terminal.moveTo(34, i);
+            System.out.println("XXXX");
+            Terminal.moveTo(35, i);
+            System.out.println("XXXX");
+        }
+    }
+
+    public static void deactivateBomb() {
+        //deactivate the bomb vertical
+        for (int i = 28; i < 41; i++) {
+            Terminal.moveTo(i, 63);
+            System.out.println("    ");
+        }
+        //deactive the bomb horizontal
+        for (int i = 50; i < 76; i++) {
+            Terminal.moveTo(33, i);
+            System.out.println("    ");
+            Terminal.moveTo(34, i);
+            System.out.println("    ");
+            Terminal.moveTo(35, i);
+            System.out.println("    ");
+        }
+    }
 
     public static void clearCharacter(int yIndex, int xIndex) {
         Terminal.moveTo(yIndex, xIndex);
@@ -144,6 +178,7 @@ public class Game {
                 } else if (x == 0 || x == 1 || x == 2 || x == 3 || x == 121 || x == 122 || x == 123 || x == 124) {
                     map[y][x] = '▅';
                 } else {
+
                     map[y][x] = ' ';
                 }
             }
@@ -167,47 +202,22 @@ public class Game {
     //Fill the map with random destructable elements
     public static void destructableWalls() {
         int randomY = (int) (Math.random() * 67);
-        /*        67*125
-                map[32][60] = '▆' + ' ';
-                map[32][61] = '▆' + ' ';
-                map[32][62] = '▆' + ' ';
-                map[32][63] = '▆' + ' ';
-                map[33][60] = '▆' + ' ';
-                map[33][61] = '▆' + ' ';
-                map[33][62] = '▆' + ' ';
-                map[33][63] = '▆' + ' ';
-                map[34][60] = '▆' + ' ';
-                map[34][61] = '▆' + ' ';
-                map[34][62] = '▆' + ' ';
-                map[34][63] = '▆' + ' ';
-
-                map[32][66] = '▆' + ' ';
-                map[32][67] = '▆' + ' ';
-                map[32][68] = '▆' + ' ';
-                map[32][69] = '▆' + ' ';
-                map[33][66] = '▆' + ' ';
-                map[33][67] = '▆' + ' ';
-                map[33][68] = '▆' + ' ';
-                map[33][69] = '▆' + ' ';
-                map[34][66] = '▆' + ' ';
-                map[34][67] = '▆' + ' ';
-                map[34][68] = '▆' + ' ';
-                map[34][69] = '▆' + ' ';
-
-        */
+        int randomX = (int) (Math.random() * 125);
     }
 
 
     //Draw the actual board
     public static void drawBoard() {
         Terminal.clearScreen();
+
         Terminal.moveTo(1, 1);
+        Terminal.setColor(Color.YELLOW_LETTER);
         for (int y = 0; y < buildBoard().length; y++) {
             for (int x = 0; x < buildBoard()[y].length; x++) {
                 System.out.print(buildBoard()[y][x]);
             }
             System.out.println();
-        }
+        } Terminal.resetStyle();
     }
 
     public static void goodBye(){
@@ -217,13 +227,15 @@ public class Game {
       System.out.print("GOOOOOOOOD BYEEEEEEEEEEEEEEEE");
       Terminal.moveTo(1, 1);
       try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
           } catch(InterruptedException i) {}
       Terminal.clearScreen();
+      Terminal.getCursorBack();
     }
 
 
     public static void main(String[] args) {
+      Terminal.cursorInvisible();
       Terminal.clearScreen();
       boolean running = true;
       Terminal.setColor(Color.RED_LETTER);
@@ -242,6 +254,7 @@ public class Game {
         } else if (userInp == 2) {
           drawBoard();
           characterPlacement(map, currentY, currentX);
+          bombPlacement();
           while (playing==true) {
             moveChar();
           }

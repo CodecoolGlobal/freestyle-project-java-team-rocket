@@ -27,6 +27,7 @@ public class Terminal {
      * styles, for example color brightness, or underlines.
      */
     private static final String STYLE = "m";
+    private static final String STYLE_RESET = "0";
 
     /**
      * Reset printing rules in effect to terminal defaults.
@@ -34,7 +35,8 @@ public class Terminal {
      * Reset the color, background color, and any other style
      * (i.e.: underlined, dim, bright) to the terminal defaults.
      */
-    public void resetStyle() {
+    public static void resetStyle() {
+        command(COLOR_CODE + STYLE_RESET + STYLE);
     }
 
     /**
@@ -67,7 +69,7 @@ public class Terminal {
      *
      * @param color The color to set.
      */
-    public void setColor(Color color) {
+    public static void setColor(Color color) {
       command(COLOR_CODE + color.colorCode + STYLE);
     }
 
@@ -78,7 +80,7 @@ public class Terminal {
      *
      * @param color The background color to set.
      */
-    public void setBgColor(Color color) {
+    public static void setBgColor(Color color) {
       command(COLOR_CODE + color.colorCode + STYLE);
     }
 
