@@ -1,4 +1,5 @@
 package com.codecool.termlib;
+import java.io.*;
 
 public class Terminal {
     /**
@@ -97,6 +98,20 @@ public class Terminal {
      * @param amount Step the cursor this many times.
      */
     public void moveCursor(Direction direction, Integer amount) {
+    }
+
+    public static void rawModeNoEcho() {
+        String[] cmd = {"/bin/sh", "-c", "stty raw -echo </dev/tty"};
+        try {
+          Runtime.getRuntime().exec(cmd);}
+          catch (IOException e){}
+    }
+
+    public static void cookedModeEcho() {
+        String[] cmd = {"/bin/sh", "-c", "stty cooked echo </dev/tty"};
+        try {
+          Runtime.getRuntime().exec(cmd);}
+          catch (IOException e){}
     }
 
     /**
