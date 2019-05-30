@@ -49,7 +49,7 @@ public class Game {
         }
         Terminal.cookedModeEcho();
     }
-
+    //Reads terminal input
     public static char readInput(){
        try{
          if(System.in.available() > 0){
