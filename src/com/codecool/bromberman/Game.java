@@ -21,13 +21,12 @@ public class Game {
                     clearCharacter(currentY, currentX);
                     Terminal.moveTo(currentY, currentX);
                     characterPlacement(map, currentY, currentX + 1);
+                    System.out.print(map[currentY][currentX]);
                 }
             } else if (direction == 'a') {
-                if (!checkBlock(direction, currentY, currentX)) {
-                    clearCharacter(currentY, currentX);
-                    Terminal.moveTo(currentY, currentX);
-                    characterPlacement(map, currentY, currentX - 1);
-                }
+                clearCharacter(currentY, currentX);
+                Terminal.moveTo(currentY, currentX);
+                characterPlacement(map, currentY, currentX - 1);
             } else if (direction == 'w') {
                 clearCharacter(currentY, currentX);
                 Terminal.moveTo(currentY, currentX);
@@ -41,7 +40,6 @@ public class Game {
                 playing = false;
             }
         }
-        System.out.println();
         Terminal.cookedModeEcho();
     }
 
@@ -73,6 +71,7 @@ public class Game {
             fakeyIndex = (yIndex / 2) + 0.5;
         }
         if (direction == 'd') {
+<<<<<<< HEAD
             System.out.print(" " + (int)fakexIndex + " ");
             //System.out.print(fakeyIndex);
             if (map[yIndex-1][(int) fakexIndex+5] == '▅' || map[(int) fakeyIndex][(int) fakexIndex+8] == '▅'
@@ -87,20 +86,39 @@ public class Game {
             }
         }*/
      return false;
+=======
+            if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅'
+            || map[yIndex+1][xIndex+8] == '▅') {
+
+                return true;
+            } else {
+            return false;
+        }
+    } return false;
+>>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
-
+        currentY = yIndex;
+        currentX = xIndex;
         Terminal.moveTo(yIndex, xIndex);
         System.out.print(" [ ^ ^ ] ");
         Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.print("  - -  ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.print("  ] [  ");
+<<<<<<< HEAD
         currentY = yIndex;
         currentX = xIndex;
         //System.out.print(currentY + " ");
         //System.out.print(currentX);
+=======
+
+        //Terminal.moveTo(72, 1);
+
+
+
+>>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 
       /*
         board[yIndex][xIndex] = '[';
@@ -172,7 +190,10 @@ public class Game {
     public static void main(String[] args) {
         String[] cmd = {"/bin/sh", "-c", "stty raw </dev/tty"};
         drawBoard();
+
         characterPlacement(map, currentY, currentX);
+        while (playing==true) {
           moveChar();
+        }
     }
 }
