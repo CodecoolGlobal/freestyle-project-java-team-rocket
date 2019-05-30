@@ -59,7 +59,37 @@ public class Game {
 
 
     public static boolean checkBlock(char direction, int yIndex, int xIndex) {
+        double fakeyIndex;
+        double fakexIndex;
+        if (xIndex %2 == 0) {
+            fakexIndex = xIndex / 2;
+        }
+        else {
+            fakexIndex = Math.ceil((xIndex / 2) + 0.5);
+        }
+        if (yIndex%2 == 0) {
+            fakeyIndex = yIndex / 2;
+        }
+        else {
+            fakeyIndex = (yIndex / 2) + 0.5;
+        }
         if (direction == 'd') {
+<<<<<<< HEAD
+            System.out.print(" " + (int)fakexIndex + " ");
+            //System.out.print(fakeyIndex);
+            if (map[yIndex-1][(int) fakexIndex+5] == '▅' || map[(int) fakeyIndex][(int) fakexIndex+8] == '▅'
+            || map[(int) fakeyIndex+1][(int) fakexIndex+8] == '▅') {
+                return true;
+            }
+    }
+        /*else if (direction == 'a') {
+            if (map[(int) fakeyIndex-1][(int) fakexIndex-4] == '▅' || map[(int) fakeyIndex][(int) fakexIndex-3] == '▅'
+            || map[(int) fakeyIndex+1][(int) fakexIndex-3] == '▅') {
+                return true;
+            }
+        }*/
+     return false;
+=======
             if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅'
             || map[yIndex+1][xIndex+8]  == '▅') {
 
@@ -68,6 +98,7 @@ public class Game {
             return false;
         }
     } return false;
+>>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
@@ -79,11 +110,18 @@ public class Game {
         System.out.print("  - -  ");
         Terminal.moveTo(yIndex+4, xIndex+2);
         System.out.print("  ] [  ");
+<<<<<<< HEAD
+        currentY = yIndex;
+        currentX = xIndex;
+        //System.out.print(currentY + " ");
+        //System.out.print(currentX);
+=======
 
         //Terminal.moveTo(72, 1);
 
 
 
+>>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 
       /*
         board[yIndex][xIndex] = '[';
