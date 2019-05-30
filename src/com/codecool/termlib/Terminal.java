@@ -112,7 +112,14 @@ public class Terminal {
         try {
           Runtime.getRuntime().exec(cmd);}
           catch (IOException e){}
-        System.out.println();
+    }
+
+    public static void cursorInvisible(){
+        command(CONTROL_CODE + "\033[?25l");
+    }
+
+    public static void getCursorBack() {
+        command(CONTROL_CODE + "\033[?25h");
     }
 
     /**
