@@ -70,9 +70,7 @@ public class Game {
                 return true;
             }
         }
-        else if {
-            
-        }
+
      return false;
 }
 
@@ -101,6 +99,10 @@ public class Game {
         board[yIndex+2][xIndex+2] = '[';
     */
   }
+
+    public static void bombPlacement() {
+        map[33][63] = 'X';
+    }
 
     public static void clearCharacter(int yIndex, int xIndex) {
         Terminal.moveTo(yIndex, xIndex);
@@ -139,7 +141,7 @@ public class Game {
                 map[y+1][x+3] = '▅';
             }
         }
-
+        bombPlacement();
         return map;
     }
 
@@ -160,7 +162,6 @@ public class Game {
     public static void main(String[] args) {
         String[] cmd = {"/bin/sh", "-c", "stty raw </dev/tty"};
         drawBoard();
-
         characterPlacement(map, currentY, currentX);
         while (playing==true) {
           moveChar();
