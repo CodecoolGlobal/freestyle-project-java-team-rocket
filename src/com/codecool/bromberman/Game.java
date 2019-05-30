@@ -9,30 +9,37 @@ public class Game {
     static Scanner userInput = new Scanner(System.in);
     static int currentY = 3;
     static int currentX = 5;
-
+    private static boolean playing = true;
 
     public static void moveChar() {
-        char direction = userInput.next().charAt(0);
-        if (direction == 'd') {
-            if (!checkBlock(direction, currentY, currentX)) {
+        char direction = '0';
+        Terminal.rawModeNoEcho();
+        while (playing) {
+            direction = readInput();
+            if (direction == 'd') {
+                if (!checkBlock(direction, currentY, currentX)) {
+                    clearCharacter(currentY, currentX);
+                    Terminal.moveTo(currentY, currentX);
+                    characterPlacement(map, currentY, currentX + 1);
+                }
+            } else if (direction == 'a') {
                 clearCharacter(currentY, currentX);
                 Terminal.moveTo(currentY, currentX);
-                characterPlacement(map, currentY, currentX + 1);
+                characterPlacement(map, currentY, currentX - 1);
+            } else if (direction == 'w') {
+                clearCharacter(currentY, currentX);
+                Terminal.moveTo(currentY, currentX);
+                characterPlacement(map, currentY - 1, currentX);
+            } else if (direction == 's') {
+                clearCharacter(currentY, currentX);
+                Terminal.moveTo(currentY, currentX);
+                characterPlacement(map, currentY + 1, currentX);
             }
-
-        } else if (direction == 'a') {
-            clearCharacter(currentY, currentX);
-            Terminal.moveTo(currentY, currentX);
-            characterPlacement(map, currentY, currentX - 1);
-        } else if (direction == 'w') {
-            clearCharacter(currentY, currentX);
-            Terminal.moveTo(currentY, currentX);
-            characterPlacement(map, currentY - 1, currentX);
-        } else if (direction == 's') {
-            clearCharacter(currentY, currentX);
-            Terminal.moveTo(currentY, currentX);
-            characterPlacement(map, currentY + 1, currentX);
+            else if (direction == 'x') {
+                playing = false;
+            }
         }
+        Terminal.cookedModeEcho();
     }
 
     public static char readInput(){
@@ -141,13 +148,9 @@ public class Game {
 
 
     public static void main(String[] args) {
-        //String[] cmd = {"/bin/sh", "-c", "stty raw </dev/tty"};
+        String[] cmd = {"/bin/sh", "-c", "stty raw </dev/tty"};
         drawBoard();
-        /*try {
-          Runtime.getRuntime().exec(cmd);}
-          catch (IOException e){
-            System.out.print("asd");
-          }*/
+
         characterPlacement(map, currentY, currentX);
         while (true) {
           moveChar();
