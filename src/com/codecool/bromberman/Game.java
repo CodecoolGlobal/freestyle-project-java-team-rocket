@@ -144,6 +144,7 @@ public class Game {
                 } else if (x == 0 || x == 1 || x == 2 || x == 3 || x == 121 || x == 122 || x == 123 || x == 124) {
                     map[y][x] = '▅';
                 } else {
+
                     map[y][x] = ' ';
                 }
             }
@@ -201,6 +202,7 @@ public class Game {
     //Draw the actual board
     public static void drawBoard() {
         Terminal.clearScreen();
+
         Terminal.moveTo(1, 1);
         Terminal.setColor(Color.YELLOW_LETTER);
         for (int y = 0; y < buildBoard().length; y++) {
