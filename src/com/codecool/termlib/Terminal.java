@@ -66,6 +66,7 @@ public class Terminal {
      * @param color The color to set.
      */
     public void setColor(Color color) {
+      command(COLOR_CODE + color.colorCode + STYLE);
     }
 
     /**
@@ -76,6 +77,7 @@ public class Terminal {
      * @param color The background color to set.
      */
     public void setBgColor(Color color) {
+      command(COLOR_CODE + color.colorCode + STYLE);
     }
 
     /**
