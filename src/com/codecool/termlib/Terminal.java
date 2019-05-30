@@ -8,6 +8,8 @@ public class Terminal {
     // HINT: In \033 the '0' means it's an octal number. And 33 in octal equals 0x1B in hexadecimal.
     // Now you have some info to decode that page where the control codes are explained ;)
     private static final String CONTROL_CODE = "\033[";
+
+    private static final String COLOR_CODE = "\u001B[";
     /**
      * Command for whole screen clearing.
      * what what what?

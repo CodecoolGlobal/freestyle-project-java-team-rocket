@@ -18,22 +18,18 @@ public class Game {
 
             direction = readInput();
             if (direction == 'd') {
-
                 if (!checkBlock(direction, currentY, currentX)) {
-
                     clearCharacter(currentY, currentX);
                     Terminal.moveTo(currentY, currentX);
-<<<<<<< HEAD
                     characterPlacement(map, currentY, currentX + 1);
-=======
-                    characterPlacement(map, currentY, currentX + 2);
->>>>>>> master
                     System.out.print(map[currentY][currentX]);
                 }
             } else if (direction == 'a') {
-                clearCharacter(currentY, currentX);
-                Terminal.moveTo(currentY, currentX);
-                characterPlacement(map, currentY, currentX - 1);
+                if (!checkBlock(direction, currentY, currentX)) {
+                    clearCharacter(currentY, currentX);
+                    Terminal.moveTo(currentY, currentX);
+                    characterPlacement(map, currentY, currentX - 1);
+                }
             } else if (direction == 'w') {
                 if (!checkBlock(direction, currentY, currentX)) {
                     clearCharacter(currentY, currentX);
@@ -68,16 +64,8 @@ public class Game {
 
     public static boolean checkBlock(char direction, int yIndex, int xIndex) {
         if (direction == 'd') {
-<<<<<<< HEAD
             if (map[yIndex-1][xIndex+6] == '▅' || map[yIndex][xIndex+6] == '▅'
             || map[yIndex+1][xIndex+6] == '▅') {
-=======
-<<<<<<< HEAD
-            System.out.print(" " + (int)fakexIndex + " ");
-            //System.out.print(fakeyIndex);
-            if (map[yIndex-1][(int) fakexIndex+5] == '▅' || map[(int) fakeyIndex][(int) fakexIndex+8] == '▅'
-            || map[(int) fakeyIndex+1][(int) fakexIndex+8] == '▅') {
->>>>>>> master
                 return true;
             }
     }
@@ -108,47 +96,21 @@ public class Game {
                     }
                 }
      return false;
-=======
-            if (map[yIndex][xIndex+9] == '▅' || map[yIndex+1][xIndex+8] == '▅'
-            || map[yIndex+1][xIndex+8]  == '▅') {
-
-                return true;
-            } else {
-            return false;
-        }
-    } return false;
->>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 }
 
     public static void characterPlacement(char[][] board, int yIndex, int xIndex) {
         currentY = yIndex;
         currentX = xIndex;
         Terminal.moveTo(yIndex, xIndex);
-<<<<<<< HEAD
         System.out.print("[ ^ ^ ]");
         Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.print(" - - ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.print(" ] [ ");
-=======
-        System.out.print(" [ ^ ^ ] ");
-        Terminal.moveTo(yIndex+2, xIndex+2);
-        System.out.print("  - -  ");
-        Terminal.moveTo(yIndex+4, xIndex+2);
-        System.out.print("  ] [  ");
-<<<<<<< HEAD
->>>>>>> master
         currentY = yIndex;
         currentX = xIndex;
         //System.out.print(currentY + " ");
         //System.out.print(currentX);
-=======
-
-        //Terminal.moveTo(72, 1);
-
-
-
->>>>>>> f891ad6ce12796cd6746d25d6b72a4744c851f8d
 
       /*
         board[yIndex][xIndex] = '[';
@@ -164,20 +126,11 @@ public class Game {
 
     public static void clearCharacter(int yIndex, int xIndex) {
         Terminal.moveTo(yIndex, xIndex);
-<<<<<<< HEAD
         System.out.println("       ");
         Terminal.moveTo(yIndex+1, xIndex+1);
         System.out.println("     ");
         Terminal.moveTo(yIndex+2, xIndex+1);
         System.out.println("     ");
-=======
-        System.out.println("         ");
-        Terminal.moveTo(yIndex+2, xIndex+2);
-        System.out.println("       ");
-        Terminal.moveTo(yIndex+4, xIndex+2);
-        System.out.println("       ");
-        Terminal.moveTo(yIndex, xIndex);
->>>>>>> master
         //Terminal.moveTo(72, 1);
     }
 
@@ -213,7 +166,7 @@ public class Game {
 
     //Fill the map with random destructable elements
     public static void destructableWalls() {
-        int randomY = (int) (Math.random() * 67)
+        int randomY = (int) (Math.random() * 67);
         /*        67*125
                 map[32][60] = '▆' + ' ';
                 map[32][61] = '▆' + ' ';
@@ -262,18 +215,11 @@ public class Game {
     public static void main(String[] args) {
         Terminal.cursorInvisible();
         drawBoard();
-<<<<<<< HEAD
         //destructableWalls();
-=======
-
->>>>>>> master
         characterPlacement(map, currentY, currentX);
         while (playing==true) {
           moveChar();
         }
-<<<<<<< HEAD
         Terminal.getCursorBack();
-=======
->>>>>>> master
     }
 }
