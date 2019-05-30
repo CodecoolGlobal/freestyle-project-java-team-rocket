@@ -2,6 +2,8 @@ package com.codecool.bromberman;
 import com.codecool.termlib.*;
 import java.util.Scanner;
 import java.io.*;
+import java.util.Random;
+import java.util.Arrays;
 
 
 public class Game {
@@ -99,7 +101,6 @@ public class Game {
                     || map[yIndex+2][xIndex+5] == '▅') {
                         return true;
                     }
-
                     }
             return false;
         }
@@ -117,7 +118,7 @@ public class Game {
         currentX = xIndex;
     }
 
-      public static void bombPlacement() {
+    public static void bombPlacement() {
             for (int i = 33; i < 36; i++) {
                 Terminal.moveTo(i, 63);
                 System.out.println("XXXX");
@@ -184,7 +185,7 @@ public class Game {
             }
         }
         //Fill the inner parts of the board with indestructable elements
-        for (int y = 5; y < map.length-2; y += 5) {
+        for (int y = 5; y < map.length-2; y += 6) {
             for (int x = 11; x < map[y].length-6; x += 11) {
                 map[y][x] = '▅';
                 map[y][x+1] = '▅';
@@ -194,22 +195,103 @@ public class Game {
                 map[y+1][x+1] = '▅';
                 map[y+1][x+2] = '▅';
                 map[y+1][x+3] = '▅';
+                map[y+2][x] = '▅';
+                map[y+2][x+1] = '▅';
+                map[y+2][x+2] = '▅';
+                map[y+2][x+3] = '▅';
             }
         }
+        //destructableWalls(map);
+                /*map[32][60] = '▆' + ' ';
+                map[32][61] = '▆' + ' ';
+                map[32][62] = '▆' + ' ';
+                map[32][63] = '▆' + ' ';
+                map[33][60] = '▆' + ' ';
+                map[33][61] = '▆' + ' ';
+                map[33][62] = '▆' + ' ';
+                map[33][63] = '▆' + ' ';
+                map[34][60] = '▆' + ' ';
+                map[34][61] = '▆' + ' ';
+                map[34][62] = '▆' + ' ';
+                map[34][63] = '▆' + ' ';
+*/
+        //destructableWalls(map);
+        /*Random random = new Random();
+        for (int i = 0; i < 30; i++) {
+            int randomY = (random.nextInt(21) * 3) + 2;
+            int randomX = (random.nextInt(11) * 11) + 5;
+            if (map[randomY][randomX] == ' ' && map[randomY][randomX+1] == ' ' &&
+                map[randomY][randomX+2] == ' ' && map[randomY][randomX+3] == ' ' &&
+                map[randomY+1][randomX] == ' ' && map[randomY+1][randomX+1] == ' ' &&
+                map[randomY+1][randomX+2] == ' ' && map[randomY+1][randomX+3] == ' ' &&
+                map[randomY+2][randomX] == ' ' && map[randomY+2][randomX+1] == ' ' &&
+                map[randomY+2][randomX+2] == ' ' && map[randomY+2][randomX+3] == ' ') {
+                map[randomY][randomX] = '▆' + ' ';
+                map[randomY][randomX+1] = '▆' + ' ';
+                map[randomY][randomX+2] = '▆' + ' ';
+                map[randomY][randomX+3] = '▆' + ' ';
+                map[randomY+1][randomX] = '▆' + ' ';
+                map[randomY+1][randomX+1] = '▆' + ' ';
+                map[randomY+1][randomX+2] = '▆' + ' ';
+                map[randomY+1][randomX+3] = '▆' + ' ';
+                map[randomY+2][randomX] = '▆' + ' ';
+                map[randomY+2][randomX+1] = '▆' + ' ';
+                map[randomY+2][randomX+2] = '▆' + ' ';
+                map[randomY+2][randomX+3] = '▆' + ' ';
+                }
+        }*/
         return map;
     }
 
     //Fill the map with random destructable elements
-    public static void destructableWalls() {
-        int randomY = (int) (Math.random() * 67);
-        int randomX = (int) (Math.random() * 125);
+    public static void destructableWalls(char[][] board) {
+        int wallCounter = 0;
+        Random random = new Random();
+        int[] randomYs = new int[60];
+        int[] randomXs = new int[60];
+        for (int i = 0; i < 60; i++) {
+            randomYs[i] = (random.nextInt(21) * 3) + 2;
+            randomXs[i] = (random.nextInt(11) * 11) + 5;
+        }
+        for (int i = 0; i < randomYs.length; i++) {
+            Terminal.moveTo(randomYs[i] -1, randomXs[i]);
+            if (board[randomYs[i]][randomXs[i]] == ' ' && board[randomYs[i]][randomXs[i]+1] == ' ' &&
+                board[randomYs[i]][randomXs[i]+2] == ' ' && board[randomYs[i]][randomXs[i]+3] == ' ' &&
+                board[randomYs[i]+1][randomXs[i]] == ' ' && board[randomYs[i]+1][randomXs[i]+1] == ' ' &&
+                board[randomYs[i]+1][randomXs[i]+2] == ' ' && board[randomYs[i]+1][randomXs[i]+3] == ' ' &&
+                board[randomYs[i]+2][randomXs[i]] == ' ' && board[randomYs[i]+2][randomXs[i]+1] == ' ' &&
+                board[randomYs[i]+2][randomXs[i]+2] == ' ' && board[randomYs[i]+2][randomXs[i]+3] == ' ') {
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i] - 1, randomXs[i]+1);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i] - 1, randomXs[i]+2);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i] - 1, randomXs[i]+3);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i], randomXs[i]);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i], randomXs[i]+1);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i], randomXs[i]+2);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i], randomXs[i]+3);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i]+1, randomXs[i]);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i]+1, randomXs[i]+1);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i]+1, randomXs[i]+2);
+                    System.out.print("▆ ");
+                    Terminal.moveTo(randomYs[i]+1, randomXs[i]+3);
+                    System.out.print("▆ ");
+                }
+        }
     }
 
 
     //Draw the actual board
     public static void drawBoard() {
         Terminal.clearScreen();
-
         Terminal.moveTo(1, 1);
         Terminal.setColor(Color.YELLOW_LETTER);
         for (int y = 0; y < buildBoard().length; y++) {
@@ -217,7 +299,9 @@ public class Game {
                 System.out.print(buildBoard()[y][x]);
             }
             System.out.println();
-        } Terminal.resetStyle();
+        }
+        //destructableWalls(map);
+        Terminal.resetStyle();
     }
 
     public static void goodBye(){
@@ -254,7 +338,9 @@ public class Game {
         } else if (userInp == 2) {
           drawBoard();
           characterPlacement(map, currentY, currentX);
-          bombPlacement();
+          destructableWalls(map);
+          //destructableWalls(map);
+          //bombPlacement();
           while (playing==true) {
             moveChar();
           }
