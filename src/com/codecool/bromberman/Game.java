@@ -9,9 +9,11 @@ public class Game {
     static Scanner userInput = new Scanner(System.in);
     static int currentY = 3;
     static int currentX = 5;
+    private static boolean playing = true;
 
 
     public static void moveChar() {
+
         char direction = userInput.next().charAt(0);
         if (direction == 'd') {
             if (!checkBlock(direction, currentY, currentX)) {
@@ -33,6 +35,10 @@ public class Game {
             Terminal.moveTo(currentY, currentX);
             characterPlacement(map, currentY + 1, currentX);
         }
+        else if (direction == 'q') {
+          playing = false;
+        }
+
     }
 
     public static char readInput(){
@@ -149,7 +155,7 @@ public class Game {
             System.out.print("asd");
           }*/
         characterPlacement(map, currentY, currentX);
-        while (true) {
+        while (playing==true) {
           moveChar();
         }
     }
