@@ -58,18 +58,34 @@ public class Game {
 
 
     public static boolean checkBlock(char direction, int yIndex, int xIndex) {
+        double fakeyIndex;
+        double fakexIndex;
+        if (xIndex %2 == 0) {
+            fakexIndex = xIndex / 2;
+        }
+        else {
+            fakexIndex = Math.ceil((xIndex / 2) + 0.5);
+        }
+        if (yIndex%2 == 0) {
+            fakeyIndex = yIndex / 2;
+        }
+        else {
+            fakeyIndex = (yIndex / 2) + 0.5;
+        }
         if (direction == 'd') {
-            if (map[yIndex-1][xIndex+9] == '▅' || map[yIndex][xIndex+8] == '▅'
-            || map[yIndex+1][xIndex+8] == '▅') {
+            System.out.print(" " + (int)fakexIndex + " ");
+            //System.out.print(fakeyIndex);
+            if (map[yIndex-1][(int) fakexIndex+5] == '▅' || map[(int) fakeyIndex][(int) fakexIndex+8] == '▅'
+            || map[(int) fakeyIndex+1][(int) fakexIndex+8] == '▅') {
                 return true;
             }
     }
-        else if (direction == 'a') {
-            if (map[yIndex-1][xIndex-4] == '▅' || map[yIndex][xIndex-3] == '▅'
-            || map[yIndex+1][xIndex-3] == '▅') {
+        /*else if (direction == 'a') {
+            if (map[(int) fakeyIndex-1][(int) fakexIndex-4] == '▅' || map[(int) fakeyIndex][(int) fakexIndex-3] == '▅'
+            || map[(int) fakeyIndex+1][(int) fakexIndex-3] == '▅') {
                 return true;
             }
-        }
+        }*/
      return false;
 }
 
@@ -83,8 +99,8 @@ public class Game {
         System.out.print("  ] [  ");
         currentY = yIndex;
         currentX = xIndex;
-        System.out.print(currentY);
-        System.out.print(currentX);
+        //System.out.print(currentY + " ");
+        //System.out.print(currentX);
 
       /*
         board[yIndex][xIndex] = '[';
